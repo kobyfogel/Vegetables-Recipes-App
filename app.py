@@ -1,14 +1,16 @@
-import os
+from os import getenv
 import random
 import string
 
+from dotenv import load_dotenv
 from flask import Flask, render_template, url_for, redirect, request
 import requests
 
 
 app = Flask(__name__)
-FDC_key = os.environ.get('FDC_KEY')
-SPOON_key = os.environ.get('SPOON_KEY')
+load_dotenv(override=True)
+FDC_key = getenv('FDC_KEY')
+SPOON_key = getenv('SPOON_KEY')
 
 
 @app.route("/")
@@ -24,7 +26,6 @@ def home():
 
 @app.route("/vegetable_result/<string:veg>")
 def vegetable_result(veg):
-    MY_KEY = 'h3VXZijgHsrwnzQlBXFctUvf9UgdWGFPnXDK3m4X'
     query = f"{veg}(fresh)(raw)"
     resp = requests.get(
         f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={FDC_key}&query={query}&datatype=Survey&pagesize=1')
@@ -63,7 +64,6 @@ def vegetable_result(veg):
 
 @app.route("/recipe_result/<string:ingredients>")
 def recipe_results(ingredients):
-    MY_KEY = "14a0fcd3db4847c991fb49f347c541f5"
     resp = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey={SPOON_key}&ingredients={ingredients}&number=20&limitLicense=false')
     recipes = resp.json()
     valid = False
@@ -72,7 +72,7 @@ def recipe_results(ingredients):
         recipe_id = recipe['id']
         recipe_name = recipe['title']
         recipe_pic = recipe['image']
-        resp = requests.get(f'https://api.spoonacular.com/recipes/{recipe_id}/analyzedInstructions?apiKey={MY_KEY}')
+        resp = requests.get(f'https://api.spoonacular.com/recipes/{recipe_id}/analyzedInstructions?apiKey={SPOON_key}')
         instructions = resp.json()
         try:
             if "steps" in instructions[0]:
