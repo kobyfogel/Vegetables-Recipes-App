@@ -1,9 +1,14 @@
-from flask import Flask, render_template, url_for, redirect, request
-import json
+import os
 import random
-import requests
 import string
+
+from flask import Flask, render_template, url_for, redirect, request
+import requests
+
+
 app = Flask(__name__)
+FDC_key = os.environ.get('FDC_KEY')
+SPOON_key = os.environ.get('SPOON_KEY')
 
 
 @app.route("/")
@@ -22,14 +27,14 @@ def vegetable_result(veg):
     MY_KEY = 'h3VXZijgHsrwnzQlBXFctUvf9UgdWGFPnXDK3m4X'
     query = f"{veg}(fresh)(raw)"
     resp = requests.get(
-        f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={MY_KEY}&query={query}&datatype=Survey&pagesize=1')
+        f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={FDC_key}&query={query}&datatype=Survey&pagesize=1')
     resp = resp.json()['foods'][0]['foodNutrients']
     ordered_nutritions = {}
     total = 0
     for i in (resp):
         if i['value'] > 0 and not i['nutrientName'].replace(":", "").isdigit() and i['unitName'] != "kJ" and i['unitName'] != "KCAL":
             gram = 0
-            if  i['unitName'] == "UG":
+            if i['unitName'] == "UG":
                 i['value'] /= 1000000
             elif i['unitName'] == "MG":
                 i['value'] /= 1000
@@ -46,20 +51,20 @@ def vegetable_result(veg):
             ordered_nutritions[i['nutrientName']] = i['value']
     for nutrition, value in ordered_nutritions.items():
         ordered_nutritions[nutrition] = value / total * 100
-    ordered_nutritions = sorted(ordered_nutritions.items(), key=lambda kv: kv[1],reverse=True)[:15]
+    ordered_nutritions = sorted(ordered_nutritions.items(), key=lambda kv: kv[1], reverse=True)[:15]
     nutritions_list = []
     for nutrition in ordered_nutritions:
         nutritions_list.append(f"{nutrition[0]}: {round(nutrition[1], 5)}")
-    vegetable_name = request.args.get("search-vegetable-form")
     ingred = request.args.get("recipe-search")
     if ingred:
         return recipe_results(ingredients=ingred)
     return render_template('vegetable_result.html', title="vegetable compounds", nutritions=nutritions_list, veg=string.capwords(veg))
 
+
 @app.route("/recipe_result/<string:ingredients>")
 def recipe_results(ingredients):
     MY_KEY = "14a0fcd3db4847c991fb49f347c541f5"
-    resp = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey={MY_KEY}&ingredients={ingredients}&number=20&limitLicense=false')
+    resp = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey={SPOON_key}&ingredients={ingredients}&number=20&limitLicense=false')
     recipes = resp.json()
     valid = False
     while not valid:
@@ -80,7 +85,7 @@ def recipe_results(ingredients):
     for i in (recipe['missedIngredients']):
         ingredients_list.append(i['original'])
     instructions_list = [i['step'] for i in instructions[0]['steps']]
-    return render_template("recipe_result.html", title="Recipes",ingredients=string.capwords(ingredients), recipe_name=recipe_name, recipe_pic=recipe_pic, ingredients_list=ingredients_list, instructions_list=instructions_list)
+    return render_template("recipe_result.html", title="Recipes", ingredients=string.capwords(ingredients), recipe_name=recipe_name, recipe_pic=recipe_pic, ingredients_list=ingredients_list, instructions_list=instructions_list)
 
 
 if __name__ == '__main__':
