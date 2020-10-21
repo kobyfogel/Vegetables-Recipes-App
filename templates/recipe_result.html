@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="alert alert-info result-div" style="padding-right: 0.5em;">
+    <h2>Recipe Results for:<br>{{ingredients}}</h2>
+    <div class="results">
+        <strong>{{ recipe_name }}</strong>
+        <div style="float: right; margin: 3em 0m 0em 2em;">
+            <a title="{{ recipe_name }}" href="{{ recipe_pic }}" target="_blank">
+                <img style="border: 2px solid black;" src="{{ recipe_pic }}" alt="{{ recipe_name }}" width="140px"><br>
+            </a>
+            <a title="generate" class="btn btn-success" style="margin-top: 0.8em; text-shadow: none;" href="{{ url_for('recipe_results', ingredients = ingredients) }}">Generate New</a>
+        </div>
+        <div style="color: red;">Ingredients:</div>
+        {% for item in ingredients_list %}
+        {{item}}
+        <br>
+        {% endfor %}
+        <div style="color: red;">Instructions:</div>
+        {% for item in instructions_list %}
+        {{item}}
+        <br>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock content %}

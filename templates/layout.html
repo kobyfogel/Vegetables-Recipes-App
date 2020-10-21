@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lemonada&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='/style.css')}}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='/icons/vegetable.png')}}" sizes="16x16">
+    
+    <title>{{ title }}</title>
+</head>
+
+
+<body>
+    <div class="container">
+        <header class="alert alert-primary">
+            <h1>Vegetables Compounds</h1>
+            <div>Ever wondered what vegetables are made of ?<br>Just search for it!</div>
+            <nav>
+                <ul>
+                    <li>
+                        <a title="Avocado" href="{{ url_for('vegetable_result', veg = 'avocado') }}">
+                            <img src="{{ url_for('static', filename='/icons/avocado.svg')}}" alt="avocado">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="tomato" href="{{ url_for('vegetable_result', veg = 'tomato') }}">
+                            <img src="{{ url_for('static', filename='/icons/tomato.svg')}}" alt="tomato">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="spinach" href="{{ url_for('vegetable_result', veg = 'spinach') }}">
+                            <img src="{{ url_for('static', filename='/icons/spinach.svg')}}" alt="spinach">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="celery" href="{{ url_for('vegetable_result', veg = 'celery') }}">
+                            <img src="{{ url_for('static', filename='/icons/celery.svg')}}" alt="celery">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="green pepper" href="{{ url_for('vegetable_result', veg = 'green pepper') }}">
+                            <img src="{{ url_for('static', filename='/icons/greenpepper.svg')}}" alt="green pepper">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="parsley" href="{{ url_for('vegetable_result', veg = 'parsley') }}">
+                            <img src="{{ url_for('static', filename='/icons/parsley.svg')}}" alt="parsley">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="zucchini" href="{{ url_for('vegetable_result', veg = 'zucchini') }}">
+                            <img src="{{ url_for('static', filename='/icons/zucchini.svg')}}" alt="zucchini">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="cauliflower" href="{{ url_for('vegetable_result', veg = 'cauliflower') }}">
+                            <img src="{{ url_for('static', filename='/icons/cauliflower.svg')}}" alt="cauliflower">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="potato" href="{{ url_for('vegetable_result', veg = 'patato') }}">
+                            <img src="{{ url_for('static', filename='/icons/potatos.svg')}}" alt="potato">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="pumpkin" href="{{ url_for('vegetable_result', veg = 'pumpkin') }}">
+                            <img src="{{ url_for('static', filename='/icons/pumpkin.svg')}}" alt="pumpkin">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="sweet potato" href="{{ url_for('vegetable_result', veg = 'sweet potato') }}">
+                            <img src="{{ url_for('static', filename='/icons/sweet-potato.svg')}}" alt="sweet potato">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="eggplant" href="{{ url_for('vegetable_result', veg = 'eggplant') }}">
+                            <img src="{{ url_for('static', filename='/icons/eggplant.svg')}}" alt="eggplant">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="cucumber" href="{{ url_for('vegetable_result', veg = 'cucumber') }}">
+                            <img src="{{ url_for('static', filename='/icons/cucumber.svg')}}" alt="cucumber">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="onion" href="{{ url_for('vegetable_result', veg = 'onion') }}">
+                            <img src="{{ url_for('static', filename='/icons/onion.svg')}}" alt="onion">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="lettuce" href="{{ url_for('vegetable_result', veg = 'lettuce') }}">
+                            <img src="{{ url_for('static', filename='/icons/lettuce.svg')}}" alt="lettuce">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="pea" href="{{ url_for('vegetable_result', veg = 'pea') }}">
+                            <img src="{{ url_for('static', filename='/icons/pea.svg')}}" alt="pea">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="dill" href="{{ url_for('vegetable_result', veg = 'dill') }}">
+                            <img src="{{ url_for('static', filename='/icons/dill.svg')}}" alt="dill">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="chilli" href="{{ url_for('vegetable_result', veg = 'chilli') }}">
+                            <img src="{{ url_for('static', filename='/icons/chilli.svg')}}" alt="chilli">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock content %}
+            <div class="alert alert-info">
+                <h2>Search For a Vegetable</h2>
+                <form action="/" method="GET">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Find compounds for:</span>
+                        </div>
+                        <input type="text" id="search-vegetable-form" name="search-vegetable-form" class="form-control" style="width:50%; margin-right: 7px;" placeholder="Vegetable Name" aria-label="recipe" aria-describedby="basic-addon1" tabindex=0 autofocus>
+                        <button type="submit" class="btn btn-success">Search</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="alert alert-info">
+            <h2>Search For a recipe</h2>
+            <form>
+                <p>Type vegetables separated by ','</p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Find a recipe with:</span>
+                    </div>
+                    <input type="text" id="basic-addon2" name="recipe-search" class="form-control" style="width:60%; margin-right: 7px; font-size: 0.9em;" placeholder="Vegetables Names" aria-label="Vegetable" aria-describedby="basic-addon1" tabindex=0 autofocus>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+            </form>
+            </div>
+
+        </main>
+    </div>
+    <div class="container">
+        <footer class="alert alert-info">
+            <a href="https://www.freepik.com/photos/food">Food photo created by onlyyouqj - www.freepik.com</a><br>
+
+            Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+                href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+        </footer>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+
+.alert {
+    padding: 0rem 1.25rem;
+    opacity: 0.90;
+}
+
+nav ul li a img {
+    width: 80%;
+    height: 80%;
+    align-self: center;
+    max-width: 60px;
+    max-height: 60px;
+    min-width: 40px;
+    margin-top: 0.5em;
+    background-color: rgb(38, 123, 138);
+    padding: 4px;
+    margin-right: 0.4em;
+    border-radius: 10%;
+
+}
+
+nav ul li a :hover {
+    background-color: rgb(74, 202, 202);
+}
+
+body {
+    background-image: url("/static/icons/table-with-vegetables1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    text-shadow: 1px 1px #fdfdfd;
+    color: black;
+    font-family: 'Lemonada', cursive;
+    
+}
+
+header {
+    margin-top: 1em;
+}
+
+nav ul {
+    padding: 0;
+    list-style-type: none;
+    flex: 1;
+    display: flex;
+    overflow: auto;
+}
+footer {
+    font-size: 0.7em;
+}
+
+.results {
+    font-size: calc(0.5em + 1.3vh);
+
+}
+.result-div {
+    max-height: 50vh;
+    overflow: auto;
+}
+h1 {
+    color: rebeccapurple;
+}
+.generate {
+    margin-top: 0.8em; 
+    text-shadow: none;
+}
+.result-div-float {
+    float: right;
+    margin: 3em 0m 0em 2em; 
+}

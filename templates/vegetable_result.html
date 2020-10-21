@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="alert alert-info result-div">
+    <h2>Compounds Results For:<br>100 gr of {{ veg }}</h2>
+    <div class="result" style="color: red;"><strong> All quantities are in grams:</strong></div>
+    <div class="results">
+        {% for item in nutritions %}
+        {{item}}
+        <br>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
