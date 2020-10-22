@@ -11,7 +11,7 @@ app = Flask(__name__)
 load_dotenv(override=True)
 FDC_key = getenv('FDC_KEY')
 SPOON_key = getenv('SPOON_KEY')
-
+FDC_key='h3VXZijgHsrwnzQlBXFctUvf9UgdWGFPnXDK3m4X'
 
 @app.route("/")
 @app.route("/home")
@@ -32,9 +32,9 @@ def vegetable_result(veg):
         f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={FDC_key}&query={query}&datatype=Survey&pagesize=1')
     resp = resp.json()['foods'][0]['foodNutrients']
     ordered_nutritions = {}
+    total = 0
     for i in (resp):
         if i['value'] > 0 and not i['nutrientName'].replace(":", "").isdigit() and i['unitName'] != "kJ" and i['unitName'] != "KCAL":
-            gram = 0
             if i['unitName'] == "UG":
                 i['value'] /= 1000000
             elif i['unitName'] == "MG":
