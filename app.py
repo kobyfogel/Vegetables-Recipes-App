@@ -3,7 +3,7 @@ import random
 import string
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, request, url_for
 import requests
 
 
@@ -24,6 +24,7 @@ def home():
         return recipe_results(ingredients=ingredients)
     return render_template('index.html', title="Vegetables Nutrition and recipes")
 
+
 @app.route("/vegetable_result/<string:veg>")
 def vegetable_result(veg):
     query = f"{veg}(fresh)(raw)"
@@ -31,7 +32,6 @@ def vegetable_result(veg):
         f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={FDC_key}&query={query}&datatype=Survey&pagesize=1')
     resp = resp.json()['foods'][0]['foodNutrients']
     ordered_nutritions = {}
-    total = 0
     for i in (resp):
         if i['value'] > 0 and not i['nutrientName'].replace(":", "").isdigit() and i['unitName'] != "kJ" and i['unitName'] != "KCAL":
             gram = 0
@@ -68,7 +68,10 @@ def recipe_results(ingredients):
     recipes = resp.json()
     valid = False
     while not valid:
-        recipe = random.choice(recipes)
+        try:
+            recipe = random.choice(recipes)
+        except IndexError:
+            return render_template("recipe_result.html", title="Recipes", ingredients=string.capwords(ingredients), recipe_name="No picture", recipe_pic=None, ingredients_list=['Could not find recipe!', 'Please check your ingredients!'], instructions_list=[])
         recipe_id = recipe['id']
         recipe_name = recipe['title']
         recipe_pic = recipe['image']
@@ -89,4 +92,4 @@ def recipe_results(ingredients):
 
 
 if __name__ == '__main__':
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=5000, debug=True)
