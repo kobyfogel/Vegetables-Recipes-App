@@ -11,7 +11,7 @@ app = Flask(__name__)
 load_dotenv(override=True)
 FDC_key = getenv('FDC_KEY')
 SPOON_key = getenv('SPOON_KEY')
-FDC_key='h3VXZijgHsrwnzQlBXFctUvf9UgdWGFPnXDK3m4X'
+
 
 @app.route("/")
 @app.route("/home")
