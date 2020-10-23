@@ -9,7 +9,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='/style.css')}}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='/icons/vegetable.png')}}" sizes="16x16">
-    
+
     <title>{{ title }}</title>
 </head>
 
@@ -122,26 +122,30 @@
                 <form action="/" method="GET">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Find compounds for:</span>
+                            <span class="input-group-text" id="basic-addon1">Find compounds for:</span>
                         </div>
-                        <input type="text" id="search-vegetable-form" name="search-vegetable-form" class="form-control" style="width:50%; margin-right: 7px;" placeholder="Vegetable Name" aria-label="recipe" aria-describedby="basic-addon1" tabindex=0 autofocus>
+                        <input type="text" id="search-vegetable-form" name="search-vegetable-form" class="form-control"
+                            style="width:50%; margin-right: 7px;" placeholder="Vegetable Name" aria-label="recipe"
+                            aria-describedby="basic-addon1" tabindex=0 autofocus>
                         <button type="submit" class="btn btn-success">Search</button>
                     </div>
                 </form>
             </div>
-            
+
             <div class="alert alert-info">
-            <h2>Search For a recipe</h2>
-            <form>
-                <p>Type vegetables separated by ','</p>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">Find a recipe with:</span>
+                <h2>Search For a recipe</h2>
+                <form>
+                    <p>Type vegetables names, separated by ','</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Find a recipe with:</span>
+                        </div>
+                        <input type="text" id="basic-addon2" name="recipe-search" class="form-control"
+                            style="width:60%; margin-right: 7px; font-size: 0.9em;" placeholder="Vegetables Names"
+                            aria-label="Vegetable" aria-describedby="basic-addon1">
+                        <button type="submit" class="btn btn-success">Search</button>
                     </div>
-                    <input type="text" id="basic-addon2" name="recipe-search" class="form-control" style="width:60%; margin-right: 7px; font-size: 0.9em;" placeholder="Vegetables Names" aria-label="Vegetable" aria-describedby="basic-addon1">
-                    <button type="submit" class="btn btn-success">Search</button>
-                </div>
-            </form>
+                </form>
             </div>
 
         </main>

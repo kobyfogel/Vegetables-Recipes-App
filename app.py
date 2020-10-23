@@ -71,7 +71,7 @@ def recipe_results(ingredients):
         try:
             recipe = random.choice(recipes)
         except IndexError:
-            return render_template("recipe_result.html", title="Recipes", ingredients=string.capwords(ingredients), recipe_name="No picture", recipe_pic=None, ingredients_list=['Could not find recipe!', 'Please check your ingredients!'], instructions_list=[])
+            return render_template("recipe_result.html", title="Recipes", ingredients=string.capwords(ingredients), recipe_name="", recipe_pic=url_for('static', filename='/icons/vegetable.svg'), ingredients_list=['Could not find recipe!', 'Please check your ingredients!'], instructions_list=[])
         recipe_id = recipe['id']
         recipe_name = recipe['title']
         recipe_pic = recipe['image']

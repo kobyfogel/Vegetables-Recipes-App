@@ -64,7 +64,7 @@ h1 {
     margin-top: 0.8em; 
     text-shadow: none;
 }
-.result-div-float {
+.results-floated {
     float: right;
-    margin: 3em 0em 0em 2em; 
+    justify-items: right;
 }
